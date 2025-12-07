@@ -1,0 +1,185 @@
+
+:root{
+  --bg:#070710;            /* фон страницы */
+  --bg-deep:#00000a;       /* глубокий фон для градиента */
+  --card-bg: rgba(255,255,255,0.04);
+  --glass-border: rgba(255,255,255,0.06);
+  --accent:#ffde3a;        /* жёлтый акцент (как титры Star Wars) */
+  --muted:#9aa0a6;         /* приглушённый текст */
+  --glass-blur: 8px;
+  --radius:14px;
+  --gap:18px;
+  font-family: Inter, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+
+/* Страница и фон (звёздное небо) */
+html,body{
+  height:100%;
+  margin:0;
+  padding:0;
+  background: radial-gradient(ellipse at top left, rgba(10,12,25,0.9) 0%, transparent 20%),
+              linear-gradient(180deg,var(--bg-deep), var(--bg));
+  color:#e6eef6;
+  background-image:
+    radial-gradient(1px 1px at 10% 10%, rgba(255,255,255,0.05) 0, transparent 40%),
+    radial-gradient(1px 1px at 80% 30%, rgba(255,255,255,0.04) 0, transparent 40%),
+    radial-gradient(1px 1px at 40% 80%, rgba(255,255,255,0.03) 0, transparent 40%),
+    linear-gradient(180deg,var(--bg-deep), var(--bg));
+  background-size: cover;
+  line-height:1.45;
+  padding:32px;
+  box-sizing:border-box;
+}
+
+/* Обертка меню */
+.menu{
+  display:flex;
+  gap:12px;
+  margin-bottom:24px;
+  justify-content:center;
+  align-items:center;
+  flex-wrap:wrap;
+}
+
+/* Кнопки меню */
+.menu button{
+  background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+  border:1px solid rgba(255,255,255,0.06);
+  color:var(--accent);
+  padding:10px 18px;
+  border-radius:999px;
+  font-weight:600;
+  letter-spacing:0.6px;
+  cursor:pointer;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.02);
+  transition: transform .14s ease, box-shadow .18s ease, background .18s ease;
+  backdrop-filter: blur(4px);
+}
+
+/* Активный/hover эффект кнопки */
+.menu button:hover{
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.65);
+}
+
+/* Карточки персонажей — общий контейнер */
+.card{
+  max-width:880px;
+  margin:12px auto;
+  padding:20px;
+  border-radius: var(--radius);
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 6px 30px rgba(2,6,23,0.6);
+  backdrop-filter: blur(var(--glass-blur)) saturate(120%);
+  transition: transform .24s cubic-bezier(.2,.9,.3,1), opacity .2s;
+  display:block;
+}
+
+/* скрытые карточки (по умолчанию) */
+.hidden{
+  display:none !important;
+  opacity:0;
+  transform: translateY(8px) scale(.995);
+}
+
+/* Заголовок карточки */
+.card h2{
+  margin:0 0 10px 0;
+  font-size:28px;
+  letter-spacing:1px;
+  color:var(--accent);
+  text-shadow: 0 2px 10px rgba(0,0,0,0.6);
+}
+
+/* Параграфы с характеристиками */
+.card p{
+  margin:6px 0;
+  color: #dce6ef;
+  font-size:15px;
+}
+
+/* Акцентное значение (выделим значение после двоеточия) */
+.card p::first-line{
+  font-weight:600;
+}
+
+/* Блок информации — две колонки на широких экранах */
+.card .info{
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap:var(--gap);
+  margin-top:12px;
+}
+
+/* Списки — фильмы / транспорт / корабли
+   (в HTML могут быть сгенерированы как ul с классом .list) */
+.list{
+  list-style:none;
+  padding:12px;
+  margin:12px 0 0 0;
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+}
+.list li{
+  background: rgba(255,255,255,0.03);
+  padding:6px 10px;
+  border-radius:8px;
+  font-size:14px;
+  color:var(--muted);
+  border:1px solid rgba(255,255,255,0.02);
+  box-shadow: 0 2px 8px rgba(2,6,23,0.45);
+}
+
+/* Дополнительные подписи */
+.meta{
+  font-size:13px;
+  color:var(--muted);
+  margin-top:10px;
+}
+
+/* Мобильная адаптивность */
+@media (max-width:820px){
+  .card{
+    margin:16px 14px;
+    padding:16px;
+  }
+  .card .info{
+    grid-template-columns: 1fr;
+  }
+  .menu{
+    justify-content:space-around;
+  }
+  .card h2{ font-size:22px; }
+}
+
+
+.card:not(.hidden){
+  animation: popIn .28s cubic-bezier(.2,.9,.3,1);
+}
+@keyframes popIn {
+  0%{ opacity:0; transform: translateY(12px) scale(.995); }
+  70%{ opacity:1; transform: translateY(-6px) scale(1.005); }
+  100%{ opacity:1; transform: translateY(0) scale(1); }
+}
+
+/* Утилиты */
+.center{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.small{
+  font-size:13px;
+  color:var(--muted);
+}
+
+/* Печать — упрощаем оформление для печати/PDF */
+@media print{
+  body{ background: #fff; color:#000; }
+  .menu, .card{ box-shadow:none; background:transparent; border:none; }
+  .menu{ display:none; }
+}

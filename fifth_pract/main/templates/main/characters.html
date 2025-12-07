@@ -1,0 +1,56 @@
+{% extends 'main/base.html' %}
+{% block title %}Персонажи{% endblock %}
+
+{% block content %}
+
+<div class="menu">
+    <button onclick="show(1)">Персонаж 1</button>
+    <button onclick="show(2)">Персонаж 2</button>
+    <button onclick="show(3)">Персонаж 3</button>
+</div>
+
+<!-- КАРТОЧКА 1 -->
+<div id="ch1" class="card hidden">
+    <h2>{{ hero1.name }}</h2>
+    <p>Рост: {{ hero1.height }}</p>
+    <p>Вес: {{ hero1.mass }}</p>
+    <p>Цвет волос: {{ hero1.hair_color }}</p>
+    <p>Цвет кожи: {{ hero1.skin_color }}</p>
+    <p>Цвет глаз: {{ hero1.eye_color }}</p>
+    <p>Год рождения: {{ hero1.birth_date }}</p>
+    <p>Пол: {{ hero1.sex }}</p>
+</div>
+
+<!-- КАРТОЧКА 2 -->
+<div id="ch2" class="card hidden">
+    <h2>{{ hero2.name }}</h2>
+    <p>Рост: {{ hero2.height }}</p>
+    <p>Вес: {{ hero2.mass }}</p>
+    <p>Цвет волос: {{ hero2.hair_color }}</p>
+    <p>Цвет кожи: {{ hero2.skin_color }}</p>
+    <p>Цвет глаз: {{ hero2.eye_color }}</p>
+    <p>Год рождения: {{ hero2.birth_date }}</p>
+    <p>Пол: {{ hero2.sex }}</p>
+</div>
+
+<!-- КАРТОЧКА 3 -->
+<div id="ch3" class="card hidden">
+    <h2>{{ hero3.name }}</h2>
+    <p>Рост: {{ hero3.height }}</p>
+    <p>Вес: {{ hero3.mass }}</p>
+    <p>Цвет волос: {{ hero3.hair_color }}</p>
+    <p>Цвет кожи: {{ hero3.skin_color }}</p>
+    <p>Цвет глаз: {{ hero3.eye_color }}</p>
+    <p>Год рождения: {{ hero3.birth_date }}</p>
+    <p>Пол: {{ hero3.sex }}</p>
+</div>
+
+
+<script>
+function show(n) {
+    document.querySelectorAll('.card').forEach(c => c.classList.add('hidden'));
+    document.getElementById('ch' + n).classList.remove('hidden');
+}
+</script>
+
+{% endblock %}
